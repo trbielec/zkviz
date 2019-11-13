@@ -13,7 +13,7 @@ import re
 from textwrap import fill
 
 
-PAT_ZK_ID = re.compile(r"^(?P<id>\d+)\s(.*)")
+PAT_ZK_ID = re.compile(r"^(?P<id>\d+)__(.*)")
 PAT_LINK = re.compile(r"\[\[(\d+)\]\]")
 
 
@@ -114,8 +114,8 @@ def parse_args(args=None):
     )
     parser.add_argument(
         "--output",
-        default="zettel-network",
-        help="name of output file. [zettel-network]",
+        default="digitalbrain_visualized",
+        help="name of output file. [digitalbrain_visualized]",
     )
     parser.add_argument(
         "--pattern",
@@ -184,7 +184,7 @@ def main(args=None):
             )
         graph = NetworkGraphviz()
     else:
-        from zkviz.plotly import NetworkPlotly
+        from network_plotly import NetworkPlotly
 
         graph = NetworkPlotly()
 

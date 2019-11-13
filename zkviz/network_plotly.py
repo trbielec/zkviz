@@ -142,7 +142,7 @@ class NetworkPlotly:
         )
         return fig
 
-    def render(self, output, view=True):
+    def render(self, output, view=False):
         """
         Render the network to disk.
 
@@ -152,7 +152,7 @@ class NetworkPlotly:
             Name of the output file.
         view : bool
             Open the rendered network using the default browser. Default is
-            True.
+            False.
 
         """
         fig = self.build_plotly_figure()

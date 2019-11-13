@@ -161,3 +161,6 @@ dmypy.json
 .pyre/
 
 # End of https://www.gitignore.io/api/python
+
+# Output file digitalbrain_visualized.html
+digitalbrain_visualized.html
