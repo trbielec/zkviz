@@ -89,9 +89,9 @@ class NetworkPlotly:
                 color=[],
                 size=10,
                 colorbar=dict(
-                    thickness=15, title="Centrality", xanchor="left", titleside="right"
+                    thickness=15, title="Adjacency", xanchor="left", titleside="right"
                 ),
-                line=dict(width=0.5),
+                line=dict(width=0.3),
             ),
         )
 
@@ -103,8 +103,15 @@ class NetworkPlotly:
             node_trace["text"] += tuple([text])
 
         # Color nodes based on the centrality
-        for node, centrality in nx.degree_centrality(self.graph).items():
-            node_trace["marker"]["color"] += tuple([centrality])
+        # for node, centrality in nx.degree_centrality(self.graph).items():
+        #     node_trace["marker"]["color"] += tuple([centrality])
+
+        node_adjacencies = []
+        for node, adjacencies in enumerate(self.graph.adjacency()):
+            node_adjacencies.append(len(adjacencies[1]))
+        # node_trace.marker.size = node_adjacencies/40
+        node_trace.marker.color = node_adjacencies
+
 
         # Draw the edges as annotations because it's only sane way to draw arrows.
         edges = []
