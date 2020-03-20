@@ -1,11 +1,11 @@
-# zkviz: Visualize Link Network Between Zettels (Notes) - Roam Research edition
+# zkviz: Visualize Link Network Between Roam Research Notes
 
 ![Version](https://img.shields.io/github/tag/Zettelkasten-Method/zkviz.svg?style=flat)
 ![License](https://img.shields.io/github/license/Zettelkasten-Method/zkviz.svg?style=flat)
 
 Produce an interactive overview of all your notes and their connections.
 
-This fork adds support for the file format of Roam Research notes export
+This fork adds support for the file format of Roam Research notes export. Assumes wikilink markdown formatting. Nested [[[[Titles]]]] are not supported (yet).
 
 ![](assets/screenshot.png)
 
@@ -30,7 +30,7 @@ Run with
 python ./zkviz/build/lib/zkviz/zkviz.py ./roam-export/*.md
 ```
 
-Open the HTML file when complete.
+Open the HTML file when complete. Rendering might take a while if your notes directory is large.
 
 The rest of the readme uses the pip package in a virtual environment.
 
