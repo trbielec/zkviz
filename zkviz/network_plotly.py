@@ -14,7 +14,9 @@ class NetworkPlotly:
         """
         self.graph = nx.Graph()
 
-    def add_node(self, node_id, title):
+
+    def add_node(self, node_id):
+    # def add_node(self, node_id, title):
         """
         Add a node to the network.
 
@@ -26,7 +28,8 @@ class NetworkPlotly:
             The text label for each node, typically the zettel title.
 
         """
-        self.graph.add_node(node_id, title=title)
+        # self.graph.add_node(node_id, title=title)
+        self.graph.add_node(node_id)
 
     def add_edge(self, source, target):
         """
@@ -60,13 +63,12 @@ class NetworkPlotly:
 
         """
 
+        # remove disconnected nodes
+        self.graph.remove_nodes_from(list(nx.isolates(self.graph)))
+
         if pos is None:
-            # The kamada kawai layout produces a really nice graph but it's
-            # a O(N^2) algorithm. It seems only reasonable to draw the graph
-            # with fewer than ~1000 nodes.
-            # (Different algo.  I don't mind waiting extra, lets bump it up to 10,000)
             if len(self.graph) < 10000:
-                pos = nx.layout.fruchterman_reingold_layout(self.graph, iterations=75)
+                pos = nx.layout.fruchterman_reingold_layout(self.graph, iterations=100)
                 # pos = nx.layout.kamada_kawai_layout(self.graph)
             else:
                 pos = nx.layout.random_layout(self.graph)
@@ -97,7 +99,7 @@ class NetworkPlotly:
 
         for node in self.graph.nodes():
             x, y = pos[node]
-            text = "<br>".join([node, self.graph.nodes[node].get("title", "")])
+            text = "<br>".join([node, self.graph.nodes[node].get("node_id", "")])
             node_trace["x"] += tuple([x])
             node_trace["y"] += tuple([y])
             node_trace["text"] += tuple([text])
@@ -107,10 +109,12 @@ class NetworkPlotly:
         #     node_trace["marker"]["color"] += tuple([centrality])
 
         node_adjacencies = []
+        node_text = []
         for node, adjacencies in enumerate(self.graph.adjacency()):
             node_adjacencies.append(len(adjacencies[1]))
-        # node_trace.marker.size = node_adjacencies/40
+        # node_trace.marker.size = node_adjacencies
         node_trace.marker.color = node_adjacencies
+
 
 
         # Draw the edges as annotations because it's only sane way to draw arrows.

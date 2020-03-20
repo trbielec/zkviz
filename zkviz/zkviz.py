@@ -71,7 +71,8 @@ def create_graph(zettels, graph, include_self_references=True, only_listed=False
         ids_to_include = zettel_ids | link_ids
 
     for zettel in zettels:
-        graph.add_node(zettel["id"], title=zettel["title"])
+        # graph.add_node(zettel["id"], title=zettel["title"])
+        graph.add_node(zettel["id"])
         for link in zettel["links"]:
             if link not in ids_to_include:
                 continue
