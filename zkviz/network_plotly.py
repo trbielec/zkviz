@@ -64,8 +64,10 @@ class NetworkPlotly:
             # The kamada kawai layout produces a really nice graph but it's
             # a O(N^2) algorithm. It seems only reasonable to draw the graph
             # with fewer than ~1000 nodes.
-            if len(self.graph) < 1000:
-                pos = nx.layout.kamada_kawai_layout(self.graph)
+            # (Different algo.  I don't mind waiting extra, lets bump it up to 10,000)
+            if len(self.graph) < 10000:
+                pos = nx.layout.fruchterman_reingold_layout(self.graph, iterations=75)
+                # pos = nx.layout.kamada_kawai_layout(self.graph)
             else:
                 pos = nx.layout.random_layout(self.graph)
 
@@ -89,7 +91,7 @@ class NetworkPlotly:
                 colorbar=dict(
                     thickness=15, title="Centrality", xanchor="left", titleside="right"
                 ),
-                line=dict(width=2),
+                line=dict(width=0.5),
             ),
         )
 
@@ -120,7 +122,7 @@ class NetworkPlotly:
                     xref="x",
                     yref="y",
                     # Aesthetics
-                    arrowwidth=2,
+                    arrowwidth=1,
                     arrowcolor="#666",
                     arrowhead=2,
                     # Have the head stop short 5 px for the center point,
