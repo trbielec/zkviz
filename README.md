@@ -1,9 +1,11 @@
-# zkviz: Visualize Link Network Between Zettels (Notes)
+# zkviz: Visualize Link Network Between Zettels (Notes) - Roam Research edition
 
 ![Version](https://img.shields.io/github/tag/Zettelkasten-Method/zkviz.svg?style=flat)
 ![License](https://img.shields.io/github/license/Zettelkasten-Method/zkviz.svg?style=flat)
 
 Produce an interactive overview of all your notes and their connections.
+
+This fork adds support for the file format of Roam Research notes export
 
 ![](assets/screenshot.png)
 
@@ -15,16 +17,22 @@ Assuming that you're using macOS or Linux, to create the environment, open
 a Terminal window and type the following to create the standalone environment
 and activate it.
 
-```sh
-python3 -m venv ~/envs/zkviz
-source ~/envs/zkviz/bin/activate
-```
+Clone this repository
 
-Then install zkviz with:
+Install this fork with:
 
 ```sh
-pip install zkviz
+python setup.py install
 ```
+
+Run with
+```sh
+python ./zkviz/build/lib/zkviz/zkviz.py ./roam-export/*.md
+```
+
+Open the HTML file when complete.
+
+The rest of the readme uses the pip package in a virtual environment.
 
 If [Graphviz](https://graphviz.org/download/) is installed on your computer,
 zkviz can use it to draw the network. It is not a Python package so it needs to
@@ -111,4 +119,3 @@ README comment within the macro to set the necessary variables.
 5. Test upload to PyPI test with `twine upload --repository-url https://test.pypi.org/legacy/ dist/*`
 6. Create a temporary environment `mktmpenv` and test install with `pip install --index-url https://test.pypi.org/simple/ zkviz`
 7. If everything looks good, upload for real with `twine upload dist/*`
-

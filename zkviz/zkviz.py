@@ -3,8 +3,8 @@
 Visualize the notes network of a Zettelkasten.
 
 Each arrow represents a link from one zettel to another. The script assumes
-that zettels have filenames of the form "YYYYMMDDHHMM This is a title" and that
-links have the form [[YYYYMMDDHHMM]]
+that zettels have filenames of the form "title" and that
+links have the form [[title]]
 
 """
 import glob
@@ -13,14 +13,14 @@ import re
 from textwrap import fill
 
 
-PAT_ZK_ID = re.compile(r"^(?P<id>\d+)__(.*)")
-PAT_LINK = re.compile(r"\[\[(\d+)\]\]")
+PAT_ZK_ID = re.compile(r"(.*)")
+PAT_LINK = re.compile(r"[\[]{2}([a-zA-Z0-9\ ]*?)\]\]")
 
 
 def parse_zettels(filepaths):
     """ Parse the ID and title from the filename.
 
-    Assumes that the filename has the format "YYYYMMDDHHMMSS This is title"
+    Assumes that the filename has the format "title"
 
     """
     documents = []
@@ -34,7 +34,7 @@ def parse_zettels(filepaths):
         with open(filepath, encoding="utf-8") as f:
             links = PAT_LINK.findall(f.read())
 
-        document = dict(id=r.group(1), title=r.group(2), links=links)
+        document = dict(id=r.group(1), title=r.group(1), links=links)
         documents.append(document)
     return documents
 
@@ -114,8 +114,8 @@ def parse_args(args=None):
     )
     parser.add_argument(
         "--output",
-        default="digitalbrain_visualized",
-        help="name of output file. [digitalbrain_visualized]",
+        default="roamresearch_visualized",
+        help="name of output file. [roamresearch_visualized]",
     )
     parser.add_argument(
         "--pattern",

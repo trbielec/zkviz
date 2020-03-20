@@ -162,5 +162,5 @@ dmypy.json
 
 # End of https://www.gitignore.io/api/python
 
-# Output file digitalbrain_visualized.html
-digitalbrain_visualized.html
+# Output file roamresearch_visualized.html
+roamresearch_visualized.html
