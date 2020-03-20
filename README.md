@@ -5,7 +5,7 @@
 
 Produce an interactive overview of all your notes and their connections.
 
-This fork adds support for the file format of Roam Research notes export. Assumes wikilink markdown formatting. Nested [[[[Titles]]]] are not supported (yet).
+This fork adds support for the file format and page [[linking]] of Roam Research notes export. Assumes wikilink markdown formatting. Nested [[[[Titles]]]] are not supported (yet), as well as hashtags and attributes.
 
 ![](assets/screenshot.png)
 
